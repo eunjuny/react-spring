@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// ReactDOM.render(
+//   <App />, //App.js를 실행
+//   document.getElementById('root') // public/index.html의 root를 찾아서 App을 집어넣는다 -> App을 root에 그려넣는다.
+// );
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

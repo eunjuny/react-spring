@@ -1,24 +1,49 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Sub from './Sub';
 
 function App() {
-  // let number = 1; //상태값 아님
-  const [number, setNumber] = useState(1); //React안에 hooks 라이브러리 상태값이 됨
-  //출력은 number, 입력은 setNumber의 느낌?
+  console.log('App 실행됨');
 
-  const add = () => {
-    setNumber(number + 1); //리액트한테 number 값 변경할게 라고 요청
-    console.log('add', number);
+  const [num, setNum] = useState(5);
+
+  let sample = [
+    { id: 1, name: '홍길동' },
+    { id: 2, name: '임꺽정' },
+    { id: 3, name: '장보고' },
+    { id: 4, name: '코스' },
+  ];
+
+  //다운로드 받음
+  const [users, setUsers] = useState(sample); //레퍼런스 변경되야 동작!
+
+  const download = () => {
+    //기존 데이터 세팅
+
+    // //변경 안됨(레퍼런스 변경x)
+    // sample.push({ id: 5, name: '조자룡' });
+    // console.log(sample);
+    // setUsers(sample);
+
+    // //변경됨 (레퍼런스 변경)
+    // const a = sample.concat({ id: 5, name: '조자룡' });
+    // setUsers(a);
+
+    //다른방법
+    // fetch().then().then();
+    setUsers([...sample, { id: num, name: '조자룡' }]);
+    setNum(num + 1);
   };
 
   //렌더링 시점 = 상태값 변경
   return (
     <div>
-      <h1>숫자:{number}</h1>
-      <button onClick={add}>더하기</button>
-      <Sub />
+      <button onClick={download}>다운로드</button>
+      {users.map((u) => (
+        <h1>
+          {u.id},{u.name}
+        </h1>
+      ))}
     </div>
   );
 }

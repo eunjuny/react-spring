@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Sub = () => {
-  //함수 제공
+let num = 10;
 
-  return (
-    <div>
-      <h1>Sub입니다.</h1>
-    </div>
-  );
-};
+function Sub() {
+  return <div></div>;
+}
 
-export default Sub;
+export { num }; //추가적으로 export 하고 싶은건 이렇게
+export default Sub; //export default 는 이 함수를 외부에 노출하겠다는 의미

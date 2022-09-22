@@ -7,6 +7,7 @@ const HomePage = () => {
   //http요청 (fetch, axios(다운))
   const [boards, setBoards] = useState([]); //boards는 상태데이터여야 한다. 그래야 데이터가 넘어왔을때 상태가 변함?
   const [number, setNumber] = useState(0);
+  const [user, setUser] = useState({});
 
   //빈 배열 한번만 실행
   useEffect(() => {
@@ -19,6 +20,7 @@ const HomePage = () => {
 
     // 빈데이터
     setBoards([...data]);
+    setUser({ id: 1, username: 'ssar' });
   }, []);
   return (
     <div>
@@ -28,6 +30,7 @@ const HomePage = () => {
         setBoards={setBoards}
         number={number}
         setNumber={setNumber}
+        user={user}
       />
       <Footer />
     </div>

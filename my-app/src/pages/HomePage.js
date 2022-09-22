@@ -6,6 +6,7 @@ import Home from '../home/Home';
 const HomePage = () => {
   //http요청 (fetch, axios(다운))
   const [boards, setBoards] = useState([]); //boards는 상태데이터여야 한다. 그래야 데이터가 넘어왔을때 상태가 변함?
+  const [number, setNumber] = useState(0);
 
   //빈 배열 한번만 실행
   useEffect(() => {
@@ -22,7 +23,12 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <Home boards={boards} setBoards={setBoards} />
+      <Home
+        boards={boards}
+        setBoards={setBoards}
+        number={number}
+        setNumber={setNumber}
+      />
       <Footer />
     </div>
   );

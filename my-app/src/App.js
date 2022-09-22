@@ -7,11 +7,12 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import LoginPages from './pages/LoginPages';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div>
-      <LoginPages />
+      <HomePage />
     </div>
   );
 }

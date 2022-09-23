@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import Home from '../home/Home';
 
 const HomePage = () => {
@@ -23,17 +21,13 @@ const HomePage = () => {
     setUser({ id: 1, username: 'ssar' });
   }, []);
   return (
-    <div>
-      <Header />
-      <Home
-        boards={boards}
-        setBoards={setBoards}
-        number={number}
-        setNumber={setNumber}
-        user={user}
-      />
-      <Footer />
-    </div>
+    <Home
+      boards={boards}
+      setBoards={setBoards}
+      number={number}
+      setNumber={setNumber}
+      user={user}
+    />
   );
 };
 

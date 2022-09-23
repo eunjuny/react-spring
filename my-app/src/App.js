@@ -8,11 +8,15 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import LoginPages from './pages/LoginPages';
 import HomePage from './pages/HomePage';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <HomePage />
+      <Header />
+      <Route path='/' exact={true} component={HomePage} />
+      <Route path='/login/:id' exact={true} component={LoginPages} />
+      <Footer />
     </div>
   );
 }

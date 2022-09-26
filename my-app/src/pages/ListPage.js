@@ -29,7 +29,7 @@ const ListPage = () => {
   ]);
 
   const handleWrite = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //onSubmit을 사용할때는 form태그가 하려는 액션을 중지 시키기 위해 이게 필요.
     setPosts([...posts, post]);
     setNo(no + 1);
   };

@@ -4,16 +4,24 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import reducer from './store';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 // ReactDOM.render(
 //   <App />, //App.js를 실행
 //   document.getElementById('root') // public/index.html의 root를 찾아서 App을 집어넣는다 -> App을 root에 그려넣는다.
 // );
 
+const store = createStore(reducer);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+//store가 App내의 모든곳에서 사용 가능하게
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

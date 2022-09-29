@@ -1,8 +1,11 @@
 package com.cos.book.web;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,6 +19,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
@@ -96,5 +100,49 @@ public class BookControllerUnitTest {
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.title").value("자바 공부하기"))
 			.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void update_테스트() throws Exception{
+		//given
+		Long id = 1L;
+		Book book = new Book(null, "C++ 따라하기", "코스");
+		String content = new ObjectMapper().writeValueAsString(book);
+		
+		when(bookService.수정하기(id,book)).thenReturn(new Book(1L, "C++ 따라하기", "코스"));
+		
+		//when
+		ResultActions resultAction = mockMvc.perform(put("/book/{id}",id)
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content(content)
+				.accept(MediaType.APPLICATION_JSON_UTF8));
+		
+		//then
+		resultAction
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.title").value("C++ 따라하기"))
+			.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void delete_테스트() throws Exception{
+		//given
+		Long id = 1L;
+		
+		when(bookService.삭제하기(id)).thenReturn("ok");	//삭제한 후에는 리턴값이 없으니까 "ok" 리턴
+		
+		//when
+		ResultActions resultAction = mockMvc.perform(delete("/book/{id}",id)
+				.accept(MediaType.TEXT_PLAIN));	// 문자출력 예시
+		
+		//then
+		resultAction
+			.andExpect(status().isOk())
+			.andDo(MockMvcResultHandlers.print());
+		
+		MvcResult requestResult = resultAction.andReturn();
+		String result = requestResult.getResponse().getContentAsString();	//json이 아니라 문자라서 
+		
+		assertEquals("ok", result);
 	}
 }

@@ -9,7 +9,7 @@ const BookItem = (props) => {
       <Card>
         <Card.Title>{title}</Card.Title>
         <Card.Body>
-          <Link to={'/post/' + id} className="btn btn-primary">
+          <Link to={'/book/' + id} className="btn btn-primary">
             상세보기
           </Link>
         </Card.Body>
